@@ -1,11 +1,11 @@
 const colors = {
-  primary: '#0D47A1',        // Fundo principal, barras
-  secondary: '#1976D2',      // Botões, destaques
-  accent: '#FFC107',         // Detalhes, ícones
-  background: '#121212',     // Fundo geral
-  card: '#1E1E1E',           // Cards, listas
-  textPrimary: '#FFFFFF',    // Títulos, texto principal
-  textSecondary: '#B0BEC5',  // Subtítulos, texto secundário
+  primary: '#003366',        // Deep navy blue - strong identity, bar backgrounds
+  secondary: '#00C853',      // Light green - accents, highlights, buttons
+  accent: '#29B6F6',         // Sky blue - icons, borders, links
+  background: '#0A0A0A',     // Overall dark background
+  card: '#1C1C1C',           // Card background
+  textPrimary: '#FFFFFF',    // Main text (team names)
+  textSecondary: '#B0BEC5',  // Subtext (coach name, details)
 };
 
 export default colors;

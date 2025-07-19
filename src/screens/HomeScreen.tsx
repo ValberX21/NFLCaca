@@ -4,8 +4,9 @@ import { getTeams } from '../services/api';
 import TeamCard from '../components/TeamCard';
 import { Team } from '../interfaces/Team';
 import colors from '../theme/colors';
+import { HomeScreenProps } from '../interfaces/HomeScreenProps'
 
-const HomeScreen = () => {
+const HomeScreen = ({ onSelectTeam }: HomeScreenProps) => {
   const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -42,13 +43,13 @@ const HomeScreen = () => {
 
   if (error) {
     return (
-    <View style={styles.centered}>
-      <View style={styles.errorCard}>
-        <Text style={styles.errorTitle}>😓 Sorry, we have a problem</Text>
-        <Text style={styles.errorMessage}>{error}</Text>
+      <View style={styles.centered}>
+        <View style={styles.errorCard}>
+          <Text style={styles.errorTitle}>😓 Sorry, we have a problem</Text>
+          <Text style={styles.errorMessage}>{error}</Text>
+        </View>
       </View>
-    </View>
-  );
+    );
   }
 
   return (
@@ -56,7 +57,9 @@ const HomeScreen = () => {
       <FlatList
         data={teams}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => <TeamCard team={item} />}
+        renderItem={({ item }) => (
+          <TeamCard team={item} onPress={() => onSelectTeam(item.id)} />
+        )}
         showsVerticalScrollIndicator={false}
       />
     </View>
@@ -78,7 +81,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-  },errorCard: {
+  }, errorCard: {
     backgroundColor: '#fff',
     borderRadius: 12,
     padding: 24,
