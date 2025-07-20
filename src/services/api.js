@@ -11,3 +11,5 @@ const api = axios.create({
 
 export const getTeams = () => api.get('/teams?league=1&season=2023');
 
+export const getTeamById = (teamId) => api.get(`/teams?id=${teamId}`);
+

@@ -3,5 +3,7 @@ export interface Team{
     name:string,
     city:string,
     coach:string,
-    logo:string
+    logo:string,
+    owner:string,
+    stadium:string
 }
