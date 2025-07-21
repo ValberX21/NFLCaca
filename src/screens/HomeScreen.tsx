@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, FlatList, StyleSheet, Text, ActivityIndicator } from 'react-native';
 import { getTeams } from '../services/api';
 import TeamCard from '../components/TeamCard';
-import { Team } from '../interfaces/Team';
+import { Team } from '../interfaces/teams/ITeam';
 import colors from '../theme/colors';
 import { HomeScreenProps } from '../interfaces/HomeScreenProps'
 

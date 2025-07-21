@@ -6,6 +6,7 @@ const colors = {
   card: '#1C1C1C',           // Card background
   textPrimary: '#FFFFFF',    // Main text (team names)
   textSecondary: '#B0BEC5',  // Subtext (coach name, details)
+  textCard: '#000000'
 };
 
 export default colors;

@@ -1,10 +1,10 @@
 import React from 'react';
 import { TouchableOpacity, View, Text, StyleSheet, Image } from 'react-native';
-import { Team } from '../interfaces/Team';
+import { ITeam } from '../interfaces/teams/ITeam';
 import colors from '../theme/colors';
 
 type TeamCardProps = {
-  team: Team;
+  team: ITeam;
   onPress: () => void;
 };
 
