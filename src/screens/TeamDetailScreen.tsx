@@ -5,9 +5,10 @@ import { ITeam } from '../interfaces/teams/ITeam';
 import LinearGradient from 'react-native-linear-gradient';
 import colors from '../theme/colors';
 import { IGame } from '../interfaces/games/IGame';
-import TeamDetailCarGame from '../components/TeamDetailCarGame';
+import TeamDetailCarGame from '../components/TeamDetailCardGame';
 import PlayersCard from '../components/TeamPlayers';
 import TeamStatistc from '../components/TeamStatistc';
+import DetailNextGame from '../components/TeamDetailNextGame';
 
 const { width, height } = Dimensions.get('window');
 
@@ -91,6 +92,7 @@ const TeamDetailScreen = ({ teamId, goBack }: TeamDetailScreenProps) => {
         </ScrollView>
 
       </View>
+      <DetailNextGame/>
     </View>
   );
 };

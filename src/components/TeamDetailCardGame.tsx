@@ -1,5 +1,3 @@
-// components/TeamDetailCardGame.tsx
-
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import { getLastGame } from '../services/api';
@@ -59,6 +57,7 @@ const TeamDetailCardGame = ({ teamId, onPress }: GameCardProps) => {
         <Text style={styles.score}>
           {teamLastGame.scores.home.total} – {teamLastGame.scores.away.total}
         </Text>
+        <Text style={styles.text}>Last game</Text>
       </View>
     </TouchableOpacity>
   );
@@ -110,6 +109,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: colors.primary,
+  },
+   text: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#000000',    
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 4,
   },
 });
 
