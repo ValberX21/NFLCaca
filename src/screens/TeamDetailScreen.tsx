@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, StyleSheet, ImageBackground, Dimensions } from 'react-native';
+import { View, Text, Button, StyleSheet, ImageBackground, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
 import { getTeamById } from '../services/api';
 import { ITeam } from '../interfaces/teams/ITeam';
 import LinearGradient from 'react-native-linear-gradient';
 import colors from '../theme/colors';
 import { IGame } from '../interfaces/games/IGame';
 import TeamDetailCarGame from '../components/TeamDetailCarGame';
+import PlayersCard from '../components/TeamPlayers';
+import TeamStatistc from '../components/TeamStatistc';
 
 const { width, height } = Dimensions.get('window');
 
@@ -40,7 +42,7 @@ const TeamDetailScreen = ({ teamId, goBack }: TeamDetailScreenProps) => {
 
     }
     fetchTeamDetail();
-  },[teamId])
+  }, [teamId])
 
   return (
     <View style={styles.container}>
@@ -63,19 +65,44 @@ const TeamDetailScreen = ({ teamId, goBack }: TeamDetailScreenProps) => {
         </LinearGradient>
       </ImageBackground>
 
-        {/* Game card below */}
-      <TeamDetailCarGame teamId={teamDetail?.id ?? 0} />
+      <View style={{ width: '100%' }}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.scrollContainer}
+        >
+          <TouchableOpacity onPress={() => console.log('Show game list')}>
+            <View style={styles.cardHoriCustom}>
+              <TeamDetailCarGame teamId={teamDetail?.id ?? 0} />
+            </View>
+          </TouchableOpacity>
 
+          <TouchableOpacity onPress={() => console.log('Show players')}>
+            <View style={styles.cardHoriCustom}>
+              <PlayersCard />
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => console.log('Show team stats')}>
+            <View style={styles.cardHori}>
+              <TeamStatistc/>
+            </View>
+          </TouchableOpacity>
+        </ScrollView>
+
+      </View>
     </View>
   );
 };
+const CARD_WIDTH = width * 0.7;
 
 const styles = StyleSheet.create({
+
+
+
   container: {
     paddingHorizontal: 16,
-    paddingVertical: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingVertical: 16
   },
   card: {
     width: width - 32,
@@ -85,7 +112,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   backgroundImage: {
-    resizeMode: 'cover',
+  
   },
   gradient: {
     padding: 16,
@@ -107,6 +134,36 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.textCard,
     marginBottom: 4,
+  },
+  scrollContainer: {
+    paddingVertical: 16,
+    paddingLeft: 16,
+    paddingRight: 8,
+  },
+  cardHori: {
+    width: 220,
+    height: 140,
+    backgroundColor: colors.card,
+    borderRadius: 12,
+    marginRight: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 12,
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: colors.textPrimary,
+  },
+  cardHoriCustom: {
+    width: CARD_WIDTH,
+    height: 140,
+    backgroundColor: colors.card,
+    borderRadius: 12,
+    marginRight: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 12,
   },
 });
 

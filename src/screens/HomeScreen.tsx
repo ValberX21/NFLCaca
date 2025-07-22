@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { View, FlatList, StyleSheet, Text, ActivityIndicator } from 'react-native';
 import { getTeams } from '../services/api';
 import TeamCard from '../components/TeamCard';
-import { Team } from '../interfaces/teams/ITeam';
+import { ITeam } from '../interfaces/teams/ITeam';
 import colors from '../theme/colors';
 import { HomeScreenProps } from '../interfaces/HomeScreenProps'
 
 const HomeScreen = ({ onSelectTeam }: HomeScreenProps) => {
-  const [teams, setTeams] = useState<Team[]>([]);
+  const [teams, setTeams] = useState<ITeam[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -17,15 +17,21 @@ const HomeScreen = ({ onSelectTeam }: HomeScreenProps) => {
 
         const response = await getTeams();
 
-        if (response.data.response && response.data.response.length > 0) {
+        if (response.data.response && response.data.response.length > 0) 
+        {
           setTeams(response.data.response);
-        } else {
+        } 
+        else if(response.data.errors.plan.requests)
+        {
+          setError(response.data.errors.plan.requests);
+        }
+        else 
+        {
           setError(response.data.errors.plan);
         }
 
       } catch (erro) {
         setError('Erro to load teams');
-        console.error(erro)
       } finally {
         setLoading(false);
       }
