@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, StyleSheet, ImageBackground, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, Dimensions, ScrollView, TouchableOpacity, BackHandler } from 'react-native';
 import { getTeamById } from '../services/api';
 import { ITeam } from '../interfaces/teams/ITeam';
 import LinearGradient from 'react-native-linear-gradient';
 import colors from '../theme/colors';
-import { IGame } from '../interfaces/games/IGame';
 import TeamDetailCarGame from '../components/TeamDetailCardGame';
 import PlayersCard from '../components/TeamPlayers';
 import TeamStatistc from '../components/TeamStatistc';
 import DetailNextGame from '../components/TeamDetailNextGame';
+import LoadingIndicator from '../components/LoadingIndicator';
+import ErrorMessage from '../components/ErrorMessage';
 
 const { width, height } = Dimensions.get('window');
 
@@ -23,8 +24,19 @@ const TeamDetailScreen = ({ teamId, goBack }: TeamDetailScreenProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  useEffect(() => {
+useEffect(() => {
+  const backHandler = BackHandler.addEventListener(
+    'hardwareBackPress',
+    () => {
+      goBack();
+      return true;
+    }
+  );
+  return () => backHandler.remove();
+}, [goBack]);
 
+
+  useEffect(() => {
     const fetchTeamDetail = async () => {
 
       try {
@@ -43,14 +55,25 @@ const TeamDetailScreen = ({ teamId, goBack }: TeamDetailScreenProps) => {
 
     }
     fetchTeamDetail();
-  }, [teamId])
+  }, [])
+
+  if (loading) {
+    return (
+      <LoadingIndicator message="Loading teams..." color="#ffffffff" />
+    );
+  }
+
+  if (error) {
+    return (
+      <ErrorMessage title='🚨 Something went wrong' message={error} />
+    );
+  }
 
   return (
     <View style={styles.container}>
       <ImageBackground
         source={{ uri: teamDetail?.logo }}
-        style={styles.card}
-        imageStyle={styles.backgroundImage}
+        style={styles.card}        
       >
         <LinearGradient
           colors={['rgba(0,0,0,0.6)', 'rgba(0,0,0,0.2)']}
@@ -86,21 +109,19 @@ const TeamDetailScreen = ({ teamId, goBack }: TeamDetailScreenProps) => {
 
           <TouchableOpacity onPress={() => console.log('Show team stats')}>
             <View style={styles.cardHori}>
-              <TeamStatistc/>
+              <TeamStatistc />
             </View>
           </TouchableOpacity>
         </ScrollView>
 
       </View>
-      <DetailNextGame/>
+      <DetailNextGame />
     </View>
   );
 };
 const CARD_WIDTH = width * 0.7;
 
 const styles = StyleSheet.create({
-
-
 
   container: {
     paddingHorizontal: 16,
@@ -112,9 +133,6 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     overflow: 'hidden',
     justifyContent: 'flex-end',
-  },
-  backgroundImage: {
-  
   },
   gradient: {
     padding: 16,
@@ -143,7 +161,7 @@ const styles = StyleSheet.create({
     paddingRight: 8,
   },
   cardHori: {
-    width: 220,
+    width: 250,
     height: 140,
     backgroundColor: colors.card,
     borderRadius: 12,

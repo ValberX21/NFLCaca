@@ -29,8 +29,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     overflow: 'hidden',
     marginVertical: 8,
-    borderWidth: 1,
-    borderColor: colors.accent,
+    borderWidth: 1,    
   },
   image: {
     flex: 1,

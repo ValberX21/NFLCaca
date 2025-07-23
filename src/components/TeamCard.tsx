@@ -16,7 +16,7 @@ const TeamCard = ({ team, onPress  }: TeamCardProps) => {
       <View style={styles.card}>
         <Text style={styles.name}>{team.name}</Text>
         <Image source={{ uri: team.logo }} style={styles.logo} />
-        <Text>Coach: {team.coach}</Text>
+        <Text style={styles.name}>Coach: {team.coach}</Text>
       </View>
     </TouchableOpacity>
   )
@@ -24,13 +24,14 @@ const TeamCard = ({ team, onPress  }: TeamCardProps) => {
 
 const styles = StyleSheet.create({
   card: {
-    borderColor: colors.background,
-    backgroundColor: colors.secondary,
+    borderColor: colors.textCard,
+    backgroundColor: colors.textPrimary,
     padding: 16,
     marginVertical: 8,
     borderRadius: 8,
   },
   name: {
+    color:'#000000',
     fontWeight: 'bold',
     fontSize: 16,
   },
