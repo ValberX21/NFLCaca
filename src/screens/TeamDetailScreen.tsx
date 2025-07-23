@@ -4,10 +4,10 @@ import { getTeamById } from '../services/api';
 import { ITeam } from '../interfaces/teams/ITeam';
 import LinearGradient from 'react-native-linear-gradient';
 import colors from '../theme/colors';
-import TeamDetailCarGame from '../components/TeamDetailCardGame';
-import PlayersCard from '../components/TeamPlayers';
-import TeamStatistc from '../components/TeamStatistc';
-import DetailNextGame from '../components/TeamDetailNextGame';
+import TeamDetailCarGame from '../components/TeamCardLastGame';
+import PlayersCard from '../components/TeamCardPlayers';
+import TeamStatistc from '../components/TeamCardStatistc';
+import DetailNextGame from '../components/TeamCardNextGame';
 import LoadingIndicator from '../components/LoadingIndicator';
 import ErrorMessage from '../components/ErrorMessage';
 
