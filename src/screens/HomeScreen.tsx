@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet, TextInput } from 'react-native';
 import { getTeams } from '../services/api';
 import TeamCard from '../components/TeamCard';
 import { ITeam } from '../interfaces/teams/ITeam';
@@ -10,6 +10,8 @@ import ErrorMessage from '../components/ErrorMessage';
 
 const HomeScreen = ({ onSelectTeam }: HomeScreenProps) => {
   const [teams, setTeams] = useState<ITeam[]>([]);
+  const [filterTeam, setfilterTeam] = useState<ITeam[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -20,9 +22,11 @@ const HomeScreen = ({ onSelectTeam }: HomeScreenProps) => {
       try {
 
         const response = await getTeams();
+        const allTeam =  response.data.response || [];
 
         if (response.data.response && response.data.response.length > 0) {
           setTeams(response.data.response);
+          setfilterTeam(allTeam);
         }
         else if (response.data.errors.plan.requests) {
           setError(response.data.errors.plan.requests);
@@ -40,6 +44,14 @@ const HomeScreen = ({ onSelectTeam }: HomeScreenProps) => {
     fetchTeams();
   }, []);
 
+  const searchTeam = (teamSearch: string) => {
+    setSearchTerm(teamSearch);
+    const filtered = teams.filter(t =>
+      t.name.toLowerCase().includes(teamSearch.toLowerCase())
+    );
+    setfilterTeam(filtered);
+  }
+
   if (loading) {
     return (
       <LoadingIndicator message="Loading teams..." color="#ffffffff" />
@@ -54,8 +66,17 @@ const HomeScreen = ({ onSelectTeam }: HomeScreenProps) => {
 
   return (
     <View style={styles.container}>
+      <TextInput
+      style={styles.searchInput}
+      placeholder='Search team by name'
+      placeholderTextColor='#aaa'      
+      value={searchTerm}
+      onChangeText={searchTeam}
+      >
+
+      </TextInput>
       <FlatList
-        data={teams}
+        data={filterTeam}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <TeamCard team={item} onPress={() => onSelectTeam(item.id)} />
@@ -72,10 +93,21 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: colors.secondary,
-  }, centered: {
+  }, 
+  centered: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+   searchInput: {
+    height: 40,
+    borderColor: '#ddd',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 12,
+    paddingHorizontal: 12,
+    color: '#fff',
+    backgroundColor: '#333',
   },
   item: {
     padding: 16,

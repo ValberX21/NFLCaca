@@ -59,7 +59,7 @@ useEffect(() => {
 
   if (loading) {
     return (
-      <LoadingIndicator message="Loading teams..." color="#ffffffff" />
+      <LoadingIndicator message="Loading team data..." color="#ffffffff" />
     );
   }
 
