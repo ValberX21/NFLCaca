@@ -1,12 +1,12 @@
 import { IGameStatus } from "./IGameStatus";
 import { IVenue } from "./IVenue";
-import { IGameData } from "./IGameDate";
+import { IGameDate } from "./IGameDate";
 
 export interface IGame {
   id: number;
   stage: string;
   week: string;
-  date: IGameData;
+  date: IGameDate;
   venue: IVenue;
   status: IGameStatus;
 }

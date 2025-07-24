@@ -16,9 +16,10 @@ const { width, height } = Dimensions.get('window');
 interface TeamDetailScreenProps {
   teamId: number;
   goBack: () => void;
+  goToGames: (teamId: number) => void;
 }
 
-const TeamDetailScreen = ({ teamId, goBack }: TeamDetailScreenProps) => {
+const TeamDetailScreen = ({ teamId, goBack, goToGames }: TeamDetailScreenProps) => {
 
   const [teamDetail, setTeamsDetail] = useState<ITeam>();
   const [loading, setLoading] = useState(true);
@@ -56,6 +57,12 @@ useEffect(() => {
     }
     fetchTeamDetail();
   }, [])
+
+  const listGames = () => {
+      if (teamDetail?.id) {
+      goToGames(teamDetail.id);
+    }
+  }
 
   if (loading) {
     return (
@@ -97,7 +104,7 @@ useEffect(() => {
         >
           <TouchableOpacity onPress={() => console.log('Show game list')}>
             <View style={styles.cardHoriCustom}>
-              <TeamDetailCarGame teamId={teamDetail?.id ?? 0} />
+              <TeamDetailCarGame teamId={teamDetail?.id ?? 0} onPress={listGames} />
             </View>
           </TouchableOpacity>
 

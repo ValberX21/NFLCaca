@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
-import { getLastGame } from '../services/api';
-import { IGameData } from '../interfaces/games/IGameDate';
+import { getListGames } from '../services/api';
+import { IGameData } from '../interfaces/games/IGameData';
 import colors from '../theme/colors';
 
 type GameCardProps = {
@@ -17,7 +17,7 @@ const TeamDetailCardGame = ({ teamId, onPress }: GameCardProps) => {
   useEffect(() => {
     const loadingLastGame = async () => {
       try {
-        const response = await getLastGame(teamId);
+        const response = await getListGames(teamId);
         if (response.data.response && response.data.response.length > 0) {
           const lastGame = response.data.response.at(-1);
           setTeamLastGame(lastGame);

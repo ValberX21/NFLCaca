@@ -13,5 +13,5 @@ export const getTeams = () => api.get('/teams?league=1&season=2023');
 
 export const getTeamById = (teamId) => api.get(`/teams?id=${teamId}`);
 
-export const getLastGame = (teamId) => api.get(`/games?team=${teamId}&season=2023`);
+export const getListGames = (teamId) => api.get(`/games?team=${teamId}&season=2023`);
 
