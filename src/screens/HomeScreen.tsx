@@ -9,6 +9,7 @@ import LoadingIndicator from '../components/LoadingIndicator';
 import ErrorMessage from '../components/ErrorMessage';
 
 const HomeScreen = ({ onSelectTeam }: HomeScreenProps) => {
+  
   const [teams, setTeams] = useState<ITeam[]>([]);
   const [filterTeam, setfilterTeam] = useState<ITeam[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -28,15 +29,15 @@ const HomeScreen = ({ onSelectTeam }: HomeScreenProps) => {
           setTeams(response.data.response);
           setfilterTeam(allTeam);
         }
-        else if (response.data.errors.plan.requests) {
-          setError(response.data.errors.plan.requests);
+        else if (response.data.errors.requests) {
+          setError(response.data.errors.requests);
         }
         else {
           setError(response.data.errors.plan);
         }
 
       } catch (erro) {
-        setError('Erro to load teams');
+        setError('Erro to load teams' + erro);
       } finally {
         setLoading(false);
       }

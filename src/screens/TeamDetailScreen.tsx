@@ -17,9 +17,10 @@ interface TeamDetailScreenProps {
   teamId: number;
   goBack: () => void;
   goToGames: (teamId: number) => void;
+  goToPlayersList: (teamId: number) => void;
 }
 
-const TeamDetailScreen = ({ teamId, goBack, goToGames }: TeamDetailScreenProps) => {
+const TeamDetailScreen = ({ teamId, goBack, goToGames, goToPlayersList }: TeamDetailScreenProps) => {
 
   const [teamDetail, setTeamsDetail] = useState<ITeam>();
   const [loading, setLoading] = useState(true);
@@ -53,7 +54,6 @@ useEffect(() => {
       } finally {
         setLoading(false);
       }
-
     }
     fetchTeamDetail();
   }, [])
@@ -61,6 +61,12 @@ useEffect(() => {
   const listGames = () => {
       if (teamDetail?.id) {
       goToGames(teamDetail.id);
+    }
+  }
+
+  const listPlayers = () =>{
+    if (teamDetail?.id) {
+      goToPlayersList(teamDetail.id);
     }
   }
 
@@ -108,9 +114,9 @@ useEffect(() => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => console.log('Show players')}>
+          <TouchableOpacity onPress={() => listPlayers}>
             <View style={styles.cardHoriCustom}>
-              <PlayersCard />
+              <PlayersCard/>
             </View>
           </TouchableOpacity>
 

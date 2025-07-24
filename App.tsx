@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import HomeScreen from './src/screens/HomeScreen';
 import TeamDetailScreen from './src/screens/TeamDetailScreen';
 import TeamGamesScreen from './src/screens/TeamGamesScreen';
+import PlayersListScreen from './src/screens/PlayersListScreen';
 import { SafeAreaView, Text, View } from 'react-native';
 import BottomNavBar from './src/components/BottomNavBar';
 import colors from './src/theme/colors';
@@ -10,6 +11,7 @@ import colors from './src/theme/colors';
 export default function App() {
   const [selectedTeamId, setSelectedTeamId] = useState<number | null>(null);
   const [viewGames, setViewGames] = useState(false);
+  const [viewPlayers, setViewPlayers] = useState(false);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.secondary }}>
@@ -20,7 +22,12 @@ export default function App() {
             setViewGames(false);
           }} />
         ) : viewGames ? (
-          <TeamGamesScreen teamId={selectedTeamId} />
+          <TeamGamesScreen teamId={selectedTeamId} goBack={() => setViewGames(false)} />
+        ) : viewPlayers ? (
+          <PlayersListScreen
+            teamId={selectedTeamId}
+            goBack={() => setViewPlayers(false)}
+          />
         ) : (
           <TeamDetailScreen
             teamId={selectedTeamId}
@@ -28,6 +35,10 @@ export default function App() {
             goToGames={(teamId) => {
               setSelectedTeamId(teamId);
               setViewGames(true);
+            }}
+            goToPlayersList={(teamId) => {
+              setSelectedTeamId(teamId);
+              setViewPlayers(true);
             }}
           />
         )}
