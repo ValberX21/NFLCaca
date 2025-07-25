@@ -9,7 +9,7 @@ import LoadingIndicator from '../components/LoadingIndicator';
 import ErrorMessage from '../components/ErrorMessage';
 
 const HomeScreen = ({ onSelectTeam }: HomeScreenProps) => {
-  
+
   const [teams, setTeams] = useState<ITeam[]>([]);
   const [filterTeam, setfilterTeam] = useState<ITeam[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -17,31 +17,29 @@ const HomeScreen = ({ onSelectTeam }: HomeScreenProps) => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-
     const fetchTeams = async () => {
-
       try {
-
         const response = await getTeams();
-        const allTeam =  response.data.response || [];
 
-        if (response.data.response && response.data.response.length > 0) {
-          setTeams(response.data.response);
-          setfilterTeam(allTeam);
-        }
-        else if (response.data.errors.requests) {
-          setError(response.data.errors.requests);
-        }
-        else {
-          setError(response.data.errors.plan);
-        }
+        const allTeams = response.data.response || [];
 
+        if (allTeams.length > 0) {
+          setTeams(allTeams);
+          setfilterTeam(allTeams);
+        } else {
+          const fallbackError =
+            response.data.errors?.requests ||
+            response.data.errors?.plan ||
+            'Unknown error loading teams';
+          setError(fallbackError);
+        }
       } catch (erro) {
-        setError('Erro to load teams' + erro);
+        setError('Erro to load teams: ' + erro);
       } finally {
         setLoading(false);
       }
-    }
+    };
+
     fetchTeams();
   }, []);
 
@@ -60,7 +58,7 @@ const HomeScreen = ({ onSelectTeam }: HomeScreenProps) => {
   }
 
   if (error) {
-    return (      
+    return (
       <ErrorMessage title='🚨 Something went wrong' message={error} />
     );
   }
@@ -68,11 +66,11 @@ const HomeScreen = ({ onSelectTeam }: HomeScreenProps) => {
   return (
     <View style={styles.container}>
       <TextInput
-      style={styles.searchInput}
-      placeholder='Search team by name'
-      placeholderTextColor='#aaa'      
-      value={searchTerm}
-      onChangeText={searchTeam}
+        style={styles.searchInput}
+        placeholder='Search team by name'
+        placeholderTextColor='#aaa'
+        value={searchTerm}
+        onChangeText={searchTeam}
       >
 
       </TextInput>
@@ -94,13 +92,13 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: colors.secondary,
-  }, 
+  },
   centered: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-   searchInput: {
+  searchInput: {
     height: 40,
     borderColor: '#ddd',
     borderWidth: 1,

@@ -108,19 +108,19 @@ useEffect(() => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.scrollContainer}
         >
-          <TouchableOpacity onPress={() => console.log('Show game list')}>
+          <TouchableOpacity>
             <View style={styles.cardHoriCustom}>
               <TeamDetailCarGame teamId={teamDetail?.id ?? 0} onPress={listGames} />
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => listPlayers}>
+          <TouchableOpacity>
             <View style={styles.cardHoriCustom}>
-              <PlayersCard/>
+              <PlayersCard onPress={listPlayers}/>
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => console.log('Show team stats')}>
+          <TouchableOpacity>
             <View style={styles.cardHori}>
               <TeamStatistc />
             </View>

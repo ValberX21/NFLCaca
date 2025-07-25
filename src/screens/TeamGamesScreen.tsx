@@ -49,7 +49,6 @@ const TeamGamesScreen = ({ teamId, goBack }: TeamGamesScreenProps) => {
           (a, b) =>
             new Date(b.game.date.date).getTime() - new Date(a.game.date.date).getTime()
         );
-        console.log('Jogos ordenados - ' + sortedGames)
         setGames(sortedGames);
         setFilteredGames(sortedGames);
       } catch (err) {

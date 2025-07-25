@@ -6,7 +6,8 @@
     "paths": {
       "@components/*": ["components/*"],
       "@screens/*": ["screens/*"],
-      "@assets/*": ["assets/*"]
+      "@assets/*": ["assets/*"],
+      "@env": ["../node_modules/react-native-dotenv"]
     }
   },
   "include": ["src"],
