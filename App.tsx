@@ -3,11 +3,10 @@ import HomeScreen from './src/screens/HomeScreen';
 import TeamDetailScreen from './src/screens/TeamDetailScreen';
 import TeamGamesScreen from './src/screens/TeamGamesScreen';
 import PlayersListScreen from './src/screens/PlayersListScreen';
-import { SafeAreaView, Text, View, ToastAndroid } from 'react-native';
+import { SafeAreaView, Text, View, ToastAndroid, Alert } from 'react-native';
 import BottomNavBar from './src/components/BottomNavBar';
 import colors from './src/theme/colors';
-
-
+import {validateEnv} from './src/validator/envValidator'
 
 export default function App() {
   const [selectedTeamId, setSelectedTeamId] = useState<number | null>(null);
@@ -19,6 +18,15 @@ export default function App() {
     setViewGames(false);
     setViewPlayers(false);
   };
+
+  useEffect(()=>{
+       try {
+      validateEnv();
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Environment Error', (error as Error).message);
+    }
+  }, []);
 
 
   return (
