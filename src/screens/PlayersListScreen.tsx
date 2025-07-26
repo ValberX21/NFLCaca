@@ -4,6 +4,8 @@ import { getListPlayers } from '../services/api'; // você deve implementar isso
 import colors from '../theme/colors';
 import { IPlayer } from 'interfaces/player/IPlayer';
 import PlayerCardData from '../components/PlayerCard';
+import LoadingIndicator from '../components/LoadingIndicator';
+import ErrorMessage from '../components/ErrorMessage';
 
 type Props = {
   teamId: number;
@@ -17,12 +19,14 @@ const PlayersListScreen = ({ teamId, goBack }: Props) => {
 
   const [players, setPlayers] = useState<IPlayer[]>();
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       () => {
-        goBack(); 
+        goBack();
         return true;
       }
     );
@@ -32,10 +36,17 @@ const PlayersListScreen = ({ teamId, goBack }: Props) => {
 
   useEffect(() => {
     const fetchPlayers = async () => {
-      const res = await getListPlayers(teamId);
-      setPlayers(res.data.response);
-      setFilteredPlayer(res.data.response);
-      setLoading(false);
+      try {
+        const res = await getListPlayers(teamId);
+        setPlayers(res.data.response);
+        setFilteredPlayer(res.data.response);
+        setLoading(false);
+      } catch (err) {
+        setError(`Erro to load player ${err}`);
+      } finally {
+        setLoading(false);
+      }
+
     };
     fetchPlayers();
   }, [teamId]);
@@ -55,7 +66,17 @@ const PlayersListScreen = ({ teamId, goBack }: Props) => {
     setFilteredPlayer(filtered ?? []);
   };
 
-  if (loading) return <Text>Loading players...</Text>;
+  if (loading) {
+    return (
+      <LoadingIndicator message="Loading players..." color="#ffffffff" />
+    );
+  }
+
+  if (error) {
+    return (
+      <ErrorMessage title='🚨 Something went wrong' message={error} />
+    );
+  }
 
   return (
     <View style={styles.container}>

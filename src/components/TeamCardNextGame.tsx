@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground,Dimensions } from 'react-native';
+import colors from '../theme/colors';
 
 type PlayersCardProps = {
   onPress?: () => void;
@@ -11,12 +12,7 @@ const DetailNextGame = ({ onPress }: PlayersCardProps) => {
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
       <View style={styles.card}>
-        <ImageBackground
-          source={require('../assets/images/nfl_team_players.png')}
-          style={styles.image}
-          imageStyle={{ borderRadius: 8 }}>
-          <Text style={styles.text}>Next game</Text>
-        </ImageBackground>
+        <Text style={styles.text}>No games incomming</Text>
       </View>
     </TouchableOpacity>
   );
@@ -24,12 +20,15 @@ const DetailNextGame = ({ onPress }: PlayersCardProps) => {
 
 const styles = StyleSheet.create({
    card: {
-    width: width - 32,
-    height: height * 0.18,
-    borderRadius: 16,
-    overflow: 'hidden',
-    justifyContent: 'flex-end',
-  },
+  width: width - 32,
+  height: height  * 0.18, // makes it square
+  borderWidth: 2,
+  borderColor: 'black',
+  borderRadius: 16,
+  overflow: 'hidden',
+  justifyContent: 'flex-end',
+}
+,
   image: {
     flex: 1,
     justifyContent: 'flex-start',

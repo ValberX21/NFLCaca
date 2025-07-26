@@ -3,7 +3,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import TeamDetailScreen from './src/screens/TeamDetailScreen';
 import TeamGamesScreen from './src/screens/TeamGamesScreen';
 import PlayersListScreen from './src/screens/PlayersListScreen';
-import { SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, Text, View, ToastAndroid } from 'react-native';
 import BottomNavBar from './src/components/BottomNavBar';
 import colors from './src/theme/colors';
 
@@ -52,9 +52,9 @@ export default function App() {
       </View>
 
       <BottomNavBar
-        onPressUser={() => console.log('User pressed')}
-        onPressHome={() => console.log('Home pressed')}
-        onPressSeason={() => console.log('Season pressed')}
+        onPressUser={() => ToastAndroid.show('Available in next version !', ToastAndroid.SHORT)}
+        onPressHome={resetToHome}
+        onPressSeason={() => ToastAndroid.show('Available in next version !', ToastAndroid.SHORT)}
       />
     </SafeAreaView>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, Dimensions, ScrollView, TouchableOpacity, BackHandler } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, Dimensions, ScrollView, TouchableOpacity, BackHandler, ToastAndroid } from 'react-native';
 import { getTeamById } from '../services/api';
 import { ITeam } from '../interfaces/teams/ITeam';
 import LinearGradient from 'react-native-linear-gradient';
@@ -70,6 +70,10 @@ useEffect(() => {
     }
   }
 
+  const statisticToast = () => {
+     ToastAndroid.show('Available in next version !', ToastAndroid.SHORT);
+  }
+
   if (loading) {
     return (
       <LoadingIndicator message="Loading team data..." color="#ffffffff" />
@@ -122,7 +126,7 @@ useEffect(() => {
 
           <TouchableOpacity>
             <View style={styles.cardHori}>
-              <TeamStatistc />
+              <TeamStatistc onPress={statisticToast}/>
             </View>
           </TouchableOpacity>
         </ScrollView>
