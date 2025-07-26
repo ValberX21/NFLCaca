@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
-import LoadingIndicator from '../components/LoadingIndicator';
+import LoadingIndicator from '../src/components/LoadingIndicator';
 
 describe('LoadingIndicator component', () => {
   it('renders ActivityIndicator and default message', () => {
