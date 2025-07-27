@@ -85,7 +85,7 @@ const TeamGamesScreen = ({ teamId, goBack }: TeamGamesScreenProps) => {
 
       <FlatList
         data={filteredGames}
-        keyExtractor={(item) => item.game.toString()}
+        keyExtractor={(item) => item.game.id.toString()}
         renderItem={({ item }) => (
           <GameCard
             homeTeam={{ name: item.teams.home.name, logo: item.teams.home.logo }}
