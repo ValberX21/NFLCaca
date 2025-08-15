@@ -1,79 +1,94 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 🏈 NLFCACA — NFL Companion App
 
-# Getting Started
+**Project Date:** July — Completed on 05/12
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## 📖 Overview
+NLFCACA is a mobile application built in **React Native** (without Expo) that consumes an external **NFL API** to display comprehensive information about teams, players, and season statistics.  
+This project was inspired by a personal challenge: after failing a test to create a simple React Native app, I decided to build one from scratch — tackling library version conflicts and handling complex JSON data along the way.
 
-## Step 1: Start the Metro Server
+---
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## ✨ Features
+- 📅 **List Season Games** — Displays all games for the current NFL season.
+- 📊 **Team Statistics** — View performance metrics and standings.
+- 🏟 **Team Details & Players List** — See team information, coaches, and complete player rosters.
+- 🔍 **Search Functionality** — Search by team name or stadium.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+---
 
-```bash
-# using npm
-npm start
+## 🛠 Tech Stack
+- **React Native** — Mobile framework (built without Expo)
+- **TypeScript** — Strong typing for safer and more maintainable code
+- **Hooks** — `useState`, `useEffect`, and custom hooks for clean state management
+- **Component-based Architecture** — UI broken down into reusable components
+- **External NFL API** — Live sports data fetching
 
-# OR using Yarn
-yarn start
+---
+
+## 📸 Demo GIF
+<!-- Replace 'demo.gif' with your actual GIF file path once ready -->
+![Demo GIF](https://github.com/ValberX21/NFLCaca/blob/main/src/assets/gif/ncfcaca.gif)
+
+---
+
+## 📂 Project Structure
+```
+NLFCACA/
+│
+├── src/
+│   ├── components/       # Reusable UI components
+│   ├── screens/          # App screens (Home, Teams, Players, etc.)
+│   ├── hooks/            # Custom React hooks
+│   ├── types/            # TypeScript interfaces
+│   ├── services/         # API calls
+│   └── assets/           # Images and icons
+│
+├── package.json
+└── App.tsx
 ```
 
-## Step 2: Start your Application
+---
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+## 🚀 Getting Started
 
-### For Android
+### Prerequisites
+- Node.js LTS
+- React Native CLI installed globally
+- Android Studio / Xcode (for emulator)
+- Physical device or emulator set up
 
+### Installation
 ```bash
-# using npm
-npm run android
+# Clone repository
+git clone https://github.com/your-username/NLFCACA.git
 
-# OR using Yarn
-yarn android
+# Install dependencies
+npm install
+
+# Run on Android
+npx react-native run-android
+
+# Run on iOS
+npx react-native run-ios
 ```
 
-### For iOS
+---
 
-```bash
-# using npm
-npm run ios
+## 📚 Learning Outcomes
+- Managed **React Native project without Expo**
+- Solved **library version conflicts**
+- Handled **complex API JSON responses** with TypeScript interfaces
+- Applied **modular architecture** and **React hooks best practices**
 
-# OR using Yarn
-yarn ios
-```
+---
+---
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+## 📌 Next Steps
+- Add player statistics
+- Implement favorites feature
+- Offline data caching
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+---
 
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## 📜 License
+This project is for learning purposes and is not affiliated with the NFL.
